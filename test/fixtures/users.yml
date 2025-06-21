@@ -1,0 +1,31 @@
+one:
+  name: "Maria Santos"
+  email: "maria@example.com"
+  phone: "41987654321"
+  academic_record: "GRR20210001"
+  password_digest: <%= BCrypt::Password.create('password123') %>
+  role: 0 # student
+
+two:
+  name: "João Silva"
+  email: "joao@example.com"
+  phone: "41987654322"
+  academic_record: "GRR20210002"
+  password_digest: <%= BCrypt::Password.create('password123') %>
+  role: 0 # student
+
+three:
+  name: "Pedro Costa"
+  email: "pedro@example.com"
+  phone: "41987654325"
+  academic_record: "GRR20210003"
+  password_digest: <%= BCrypt::Password.create('password123') %>
+  role: 0 # student
+
+admin:
+  name: "Admin User"
+  email: "admin@example.com"
+  phone: "41987654324"
+  academic_record: "GRR20000001"
+  password_digest: <%= BCrypt::Password.create('password123') %>
+  role: 1 # admin

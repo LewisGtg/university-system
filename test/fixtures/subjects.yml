@@ -1,0 +1,19 @@
+one:
+  name: "Programação Web"
+  code: "CI1062"
+  description: "Desenvolvimento de aplicações web modernas usando Ruby on Rails, JavaScript e tecnologias relacionadas."
+
+two:
+  name: "Banco de Dados"
+  code: "CI1050"
+  description: "Fundamentos de sistemas de gerenciamento de banco de dados relacionais e não relacionais."
+
+three:
+  name: "Estruturas de Dados"
+  code: "CI1001"
+  description: "Algoritmos e estruturas de dados fundamentais para programação eficiente."
+
+four:
+  name: "Engenharia de Software"
+  code: "CI1030"
+  description: "Metodologias e práticas para desenvolvimento de software em equipe."

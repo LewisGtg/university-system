@@ -1,0 +1,113 @@
+<div class="row mb-4">
+  <div class="col">
+    <h1>Dashboard</h1>
+  </div>
+</div>
+
+<% if admin? %>
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card text-white bg-primary">
+        <div class="card-body">
+          <h5 class="card-title">Users</h5>
+          <h2><%= @users_count %></h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-success">
+        <div class="card-body">
+          <h5 class="card-title">Subjects</h5>
+          <h2><%= @subjects_count %></h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-warning">
+        <div class="card-body">
+          <h5 class="card-title">Monitorships</h5>
+          <h2><%= @monitorships_count %></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Recent Users</h5>
+        </div>
+        <div class="card-body">
+          <% if @recent_users.any? %>
+            <% @recent_users.each do |user| %>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span><%= user.name %></span>
+                <span class="badge bg-<%= user.admin? ? 'danger' : 'info' %>">
+                  <%= user.role.capitalize %>
+                </span>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-muted">No users yet.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Quick Actions</h5>
+        </div>
+        <div class="card-body">
+          <%= link_to "Add New User", new_user_path, class: "btn btn-primary mb-2 d-block" %>
+          <%= link_to "Add New Subject", new_subject_path, class: "btn btn-success mb-2 d-block" %>
+          <%= link_to "Assign Monitor", new_monitorship_path, class: "btn btn-warning d-block" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>My Subjects</h5>
+        </div>
+        <div class="card-body">
+          <% if @my_subjects.any? %>
+            <% @my_subjects.each do |subject| %>
+              <div class="mb-2">
+                <%= link_to subject.name, subject_path(subject), class: "text-decoration-none" %>
+                <small class="text-muted d-block"><%= subject.code %></small>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-muted">You are not enrolled in any subjects yet.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Monitor Status</h5>
+        </div>
+        <div class="card-body">
+          <% if @monitored_subject %>
+            <p>You are a monitor for:</p>
+            <div class="alert alert-success">
+              <%= link_to @monitored_subject.name, subject_path(@monitored_subject), class: "alert-link" %>
+              <small class="d-block"><%= @monitored_subject.code %></small>
+            </div>
+          <% else %>
+            <p class="text-muted">You are not assigned as a monitor for any subject.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

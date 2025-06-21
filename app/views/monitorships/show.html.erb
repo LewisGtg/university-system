@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h3>Monitor Assignment</h3>
+        <div>
+          <%= link_to "Remove", monitorship_path(@monitorship), method: :delete, 
+              data: { confirm: "Remove this monitor assignment?" }, 
+              class: "btn btn-danger btn-sm" %>
+          <%= link_to "Back", monitorships_path, class: "btn btn-secondary btn-sm" %>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-sm-3"><strong>Subject:</strong></div>
+          <div class="col-sm-9">
+            <%= link_to @monitorship.subject.name, subject_path(@monitorship.subject), class: "text-decoration-none" %>
+            <small class="text-muted d-block"><%= @monitorship.subject.code %></small>
+          </div>
+        </div>
+        <hr>
+        <div class="row mb-3">
+          <div class="col-sm-3"><strong>Monitor:</strong></div>
+          <div class="col-sm-9">
+            <%= link_to @monitorship.user.name, user_path(@monitorship.user), class: "text-decoration-none" %>
+            <small class="text-muted d-block"><%= @monitorship.user.email %></small>
+          </div>
+        </div>
+        <hr>
+        <div class="row mb-3">
+          <div class="col-sm-3"><strong>Assigned Date:</strong></div>
+          <div class="col-sm-9"><%= @monitorship.created_at.strftime("%B %d, %Y at %I:%M %p") %></div>
+        </div>
+        <hr>
+        <div class="row mb-3">
+          <div class="col-sm-3"><strong>Subject Description:</strong></div>
+          <div class="col-sm-9"><%= @monitorship.subject.description %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

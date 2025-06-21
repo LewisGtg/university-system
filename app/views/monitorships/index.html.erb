@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Monitorships</h1>
+  <%= link_to "Assign New Monitor", new_monitorship_path, class: "btn btn-primary" %>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <% if @monitorships.any? %>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Subject Code</th>
+              <th>Monitor</th>
+              <th>Monitor Email</th>
+              <th>Assigned Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @monitorships.each do |monitorship| %>
+              <tr>
+                <td><%= monitorship.subject.name %></td>
+                <td><%= monitorship.subject.code %></td>
+                <td><%= monitorship.user.name %></td>
+                <td><%= monitorship.user.email %></td>
+                <td><%= monitorship.created_at.strftime("%B %d, %Y") %></td>
+                <td>
+                  <%= link_to "View", monitorship_path(monitorship), class: "btn btn-sm btn-outline-primary" %>
+                  <%= link_to "Remove", monitorship_path(monitorship), method: :delete, 
+                      data: { confirm: "Remove #{monitorship.user.name} as monitor of #{monitorship.subject.name}?" }, 
+                      class: "btn btn-sm btn-outline-danger" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p class="text-muted">No monitors assigned yet.</p>
+    <% end %>
+  </div>
+</div>
