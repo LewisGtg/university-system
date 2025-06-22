@@ -4,8 +4,8 @@ class User < ApplicationRecord
   enum role: { student: 0, admin: 1 }
   
   has_and_belongs_to_many :subjects
-  has_one :monitorship, dependent: :destroy
-  has_one :monitored_subject, through: :monitorship, source: :subject
+  has_many :monitorships, dependent: :destroy
+  has_many :monitored_subjects, through: :monitorships, source: :subject
   
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
@@ -19,5 +19,9 @@ class User < ApplicationRecord
   
   def student?
     role == 'student'
+  end
+  
+  def monitored_subject
+    monitored_subjects.first
   end
 end

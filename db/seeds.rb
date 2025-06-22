@@ -10,12 +10,12 @@
 
 # Create admin user
 admin = User.create!(
-  name: "Administrator",
-  email: "admin@university.com",
+  name: "Administrador",
+  email: "admin@universidade.com",
   phone: "(11) 99999-9999",
   academic_record: "ADM001",
-  password: "password123",
-  password_confirmation: "password123",
+  password: "senha123",
+  password_confirmation: "senha123",
   role: "admin"
 )
 
@@ -23,47 +23,47 @@ admin = User.create!(
 students = [
   {
     name: "João Silva",
-    email: "joao.silva@student.university.com",
+    email: "joao.silva@estudante.universidade.com",
     phone: "(11) 98888-8888",
-    academic_record: "STU001",
-    password: "password123",
-    password_confirmation: "password123",
+    academic_record: "EST001",
+    password: "senha123",
+    password_confirmation: "senha123",
     role: "student"
   },
   {
     name: "Maria Santos",
-    email: "maria.santos@student.university.com",
+    email: "maria.santos@estudante.universidade.com",
     phone: "(11) 97777-7777",
-    academic_record: "STU002",
-    password: "password123",
-    password_confirmation: "password123",
+    academic_record: "EST002",
+    password: "senha123",
+    password_confirmation: "senha123",
     role: "student"
   },
   {
     name: "Pedro Oliveira",
-    email: "pedro.oliveira@student.university.com",
+    email: "pedro.oliveira@estudante.universidade.com",
     phone: "(11) 96666-6666",
-    academic_record: "STU003",
-    password: "password123",
-    password_confirmation: "password123",
+    academic_record: "EST003",
+    password: "senha123",
+    password_confirmation: "senha123",
     role: "student"
   },
   {
     name: "Ana Costa",
-    email: "ana.costa@student.university.com",
+    email: "ana.costa@estudante.universidade.com",
     phone: "(11) 95555-5555",
-    academic_record: "STU004",
-    password: "password123",
-    password_confirmation: "password123",
+    academic_record: "EST004",
+    password: "senha123",
+    password_confirmation: "senha123",
     role: "student"
   },
   {
     name: "Carlos Ferreira",
-    email: "carlos.ferreira@student.university.com",
+    email: "carlos.ferreira@estudante.universidade.com",
     phone: "(11) 94444-4444",
-    academic_record: "STU005",
-    password: "password123",
-    password_confirmation: "password123",
+    academic_record: "EST005",
+    password: "senha123",
+    password_confirmation: "senha123",
     role: "student"
   }
 ]
@@ -135,8 +135,8 @@ Monitorship.create!(
   subject: created_subjects[1]
 )
 
-puts "Database seeded successfully!"
-puts "Admin user: admin@university.com / password123"
-puts "Students created: #{created_students.count}"
-puts "Subjects created: #{created_subjects.count}"
-puts "Monitorships created: 2"
+puts "Banco de dados populado com sucesso!"
+puts "Usuário admin: admin@universidade.com / senha123"
+puts "Estudantes criados: #{created_students.count}"
+puts "Disciplinas criadas: #{created_subjects.count}"
+puts "Monitorias criadas: 2"

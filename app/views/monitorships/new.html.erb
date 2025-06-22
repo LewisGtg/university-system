@@ -2,13 +2,13 @@
   <div class="col-md-8">
     <div class="card">
       <div class="card-header">
-        <h3>Assign Monitor</h3>
+        <h3>Atribuir Monitor</h3>
       </div>
       <div class="card-body">
         <%= form_with model: @monitorship, local: true do |form| %>
           <% if @monitorship.errors.any? %>
             <div class="alert alert-danger">
-              <h4><%= pluralize(@monitorship.errors.count, "error") %> prohibited this assignment:</h4>
+              <h4><%= pluralize(@monitorship.errors.count, "erro") %> impediram esta atribuição:</h4>
               <ul class="mb-0">
                 <% @monitorship.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
@@ -18,26 +18,26 @@
           <% end %>
 
           <div class="mb-3">
-            <%= form.label :subject_id, "Subject", class: "form-label" %>
+            <%= form.label :subject_id, "Disciplina", class: "form-label" %>
             <%= form.select :subject_id, 
                 options_from_collection_for_select(@subjects, :id, :name), 
-                { prompt: 'Select a subject' }, 
+                { prompt: 'Selecione uma disciplina' }, 
                 { class: "form-select" } %>
-            <div class="form-text">Only subjects without monitors are shown.</div>
+            <div class="form-text">Apenas disciplinas sem monitores são mostradas.</div>
           </div>
 
           <div class="mb-3">
-            <%= form.label :user_id, "Student", class: "form-label" %>
+            <%= form.label :user_id, "Estudante", class: "form-label" %>
             <%= form.select :user_id, 
                 options_from_collection_for_select(@students, :id, :name), 
-                { prompt: 'Select a student' }, 
+                { prompt: 'Selecione um estudante' }, 
                 { class: "form-select" } %>
-            <div class="form-text">Students cannot be monitors of subjects they are enrolled in.</div>
+            <div class="form-text">Estudantes não podem ser monitores de disciplinas em que estão matriculados.</div>
           </div>
 
           <div class="d-flex gap-2">
-            <%= form.submit "Assign Monitor", class: "btn btn-primary" %>
-            <%= link_to "Cancel", monitorships_path, class: "btn btn-secondary" %>
+            <%= form.submit "Atribuir Monitor", class: "btn btn-primary" %>
+            <%= link_to "Cancelar", monitorships_path, class: "btn btn-secondary" %>
           </div>
         <% end %>
       </div>

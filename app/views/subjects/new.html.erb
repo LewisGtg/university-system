@@ -2,7 +2,7 @@
   <div class="col-md-8">
     <div class="card">
       <div class="card-header">
-        <h3>Add New Subject</h3>
+        <h3>Adicionar Nova Disciplina</h3>
       </div>
       <div class="card-body">
         <%= form_with model: @subject, local: true do |form| %>
@@ -18,23 +18,23 @@
           <% end %>
 
           <div class="mb-3">
-            <%= form.label :name, class: "form-label" %>
+            <%= form.label :Nome, class: "form-label" %>
             <%= form.text_field :name, class: "form-control" %>
           </div>
 
           <div class="mb-3">
-            <%= form.label :code, class: "form-label" %>
+            <%= form.label :Código, class: "form-label" %>
             <%= form.text_field :code, class: "form-control" %>
           </div>
 
           <div class="mb-3">
-            <%= form.label :description, class: "form-label" %>
+            <%= form.label :Descrição, class: "form-label" %>
             <%= form.text_area :description, class: "form-control", rows: 4 %>
           </div>
 
           <div class="d-flex gap-2">
-            <%= form.submit "Create Subject", class: "btn btn-primary" %>
-            <%= link_to "Cancel", subjects_path, class: "btn btn-secondary" %>
+            <%= form.submit "Criar Disciplina", class: "btn btn-primary" %>
+            <%= link_to "Cancelar", subjects_path, class: "btn btn-secondary" %>
           </div>
         <% end %>
       </div>

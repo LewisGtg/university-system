@@ -5,18 +5,18 @@
         <h3><%= @subject.name %></h3>
         <% if admin? %>
           <div>
-            <%= link_to "Edit", edit_subject_path(@subject), class: "btn btn-warning btn-sm" %>
-            <%= link_to "Back", subjects_path, class: "btn btn-secondary btn-sm" %>
+            <%= link_to "Editar", edit_subject_path(@subject), class: "btn btn-warning btn-sm" %>
+            <%= link_to "Voltar", subjects_path, class: "btn btn-secondary btn-sm" %>
           </div>
         <% end %>
       </div>
       <div class="card-body">
         <div class="row mb-3">
-          <div class="col-sm-3"><strong>Code:</strong></div>
+          <div class="col-sm-3"><strong>Código:</strong></div>
           <div class="col-sm-9"><%= @subject.code %></div>
         </div>
         <div class="row mb-3">
-          <div class="col-sm-3"><strong>Description:</strong></div>
+          <div class="col-sm-3"><strong>Descrição:</strong></div>
           <div class="col-sm-9"><%= @subject.description %></div>
         </div>
         <div class="row mb-3">
@@ -25,7 +25,7 @@
             <% if @monitor %>
               <span class="badge bg-success"><%= @monitor.name %></span>
             <% else %>
-              <span class="text-muted">No monitor assigned</span>
+              <span class="text-muted">Sem monitor</span>
             <% end %>
           </div>
         </div>
@@ -36,10 +36,10 @@
   <div class="col-md-4">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h5>Enrolled Students (<%= @students.count %>)</h5>
+        <h5>Estudantes matriculados (<%= @students.count %>)</h5>
         <% if admin? && @available_students.any? %>
           <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#enrollModal">
-            Add Student
+            Adicionar
           </button>
         <% end %>
       </div>
@@ -49,14 +49,14 @@
             <div class="d-flex justify-content-between align-items-center mb-2">
               <span><%= student.name %></span>
               <% if admin? %>
-                <%= link_to "Remove", unenroll_subject_path(@subject, student), 
-                    method: :delete, data: { confirm: "Remove #{student.name} from this subject?" },
+                <%= link_to "Remover", unenroll_subject_path(@subject, student), 
+                    data: { turbo_method: :delete, turbo_confirm: "Remove #{student.name} from this subject?" },
                     class: "btn btn-sm btn-outline-danger" %>
               <% end %>
             </div>
           <% end %>
         <% else %>
-          <p class="text-muted">No students enrolled yet.</p>
+          <p class="text-muted">Não há estudantes matriculados.</p>
         <% end %>
       </div>
     </div>
@@ -69,25 +69,39 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Enroll Student</h5>
+          <h5 class="modal-title">Matricular Estudante</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <%= form_with url: enroll_subject_path(@subject, 0), method: :post, local: true do |form| %>
+        <%= form_with url: enroll_subject_path(@subject, @available_students.first), method: :post, local: true, id: "enrollForm" do |form| %>
           <div class="modal-body">
             <div class="mb-3">
-              <%= form.label :user_id, "Select Student", class: "form-label" %>
+              <%= form.label :user_id, "Selecione o Estudante", class: "form-label" %>
               <%= form.select :user_id, 
                   options_from_collection_for_select(@available_students, :id, :name), 
-                  { prompt: 'Choose a student' }, 
-                  { class: "form-select" } %>
+                  { prompt: 'Selecionar' }, 
+                  { class: "form-select", onchange: "updateEnrollFormAction(this.value)" } %>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <%= form.submit "Enroll Student", class: "btn btn-primary" %>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <%= form.submit "Matricular Estudante", class: "btn btn-primary", id: "enrollSubmit", disabled: true %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
+
+  <script>
+    function updateEnrollFormAction(userId) {
+      const form = document.getElementById('enrollForm');
+      const submitBtn = document.getElementById('enrollSubmit');
+      
+      if (userId) {
+        form.action = '<%= enroll_subject_path(@subject, 'USER_ID') %>'.replace('USER_ID', userId);
+        submitBtn.disabled = false;
+      } else {
+        submitBtn.disabled = true;
+      }
+    }
+  </script>
 <% end %>

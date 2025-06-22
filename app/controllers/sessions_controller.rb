@@ -10,15 +10,16 @@ class SessionsController < ApplicationController
     
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: 'Logged in successfully!'
+      redirect_to root_path, notice: 'Login realizado com sucesso!'
     else
-      flash.now[:alert] = 'Invalid email or password'
-      render :new
+      flash.now[:alert] = 'E-mail ou senha inválidos. Verifique suas credenciais e tente novamente.'
+      @email = params[:email] # Preserve email for the form
+      render :new, status: :unprocessable_entity
     end
   end
   
   def destroy
     session[:user_id] = nil
-    redirect_to login_path, notice: 'Logged out successfully!'
+    redirect_to login_path, notice: 'Logout realizado com sucesso!'
   end
 end

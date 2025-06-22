@@ -20,7 +20,7 @@ class SubjectsController < ApplicationController
     @subject = Subject.new(subject_params)
     
     if @subject.save
-      redirect_to subjects_path, notice: 'Subject created successfully!'
+      redirect_to subjects_path, notice: 'Disciplina criada com sucesso!'
     else
       render :new
     end
@@ -31,7 +31,7 @@ class SubjectsController < ApplicationController
   
   def update
     if @subject.update(subject_params)
-      redirect_to subjects_path, notice: 'Subject updated successfully!'
+      redirect_to subjects_path, notice: 'Disciplina atualizada com sucesso!'
     else
       render :edit
     end
@@ -39,19 +39,19 @@ class SubjectsController < ApplicationController
   
   def destroy
     @subject.destroy
-    redirect_to subjects_path, notice: 'Subject deleted successfully!'
+    redirect_to subjects_path, notice: 'Disciplina excluída com sucesso!'
   end
   
   def enroll
     student = User.find(params[:user_id])
     @subject.users << student unless @subject.users.include?(student)
-    redirect_to @subject, notice: 'Student enrolled successfully!'
+    redirect_to @subject, notice: 'Estudante matriculado com sucesso!'
   end
   
   def unenroll
     student = User.find(params[:user_id])
     @subject.users.delete(student)
-    redirect_to @subject, notice: 'Student unenrolled successfully!'
+    redirect_to @subject, notice: 'Estudante removido com sucesso!'
   end
   
   private

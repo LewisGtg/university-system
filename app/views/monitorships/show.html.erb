@@ -2,17 +2,17 @@
   <div class="col-md-8">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h3>Monitor Assignment</h3>
+        <h3>Atribuição de Monitor</h3>
         <div>
-          <%= link_to "Remove", monitorship_path(@monitorship), method: :delete, 
-              data: { confirm: "Remove this monitor assignment?" }, 
+          <%= link_to "Remover", monitorship_path(@monitorship), 
+              data: { turbo_method: :delete, turbo_confirm: "Remover esta atribuição de monitor?" }, 
               class: "btn btn-danger btn-sm" %>
-          <%= link_to "Back", monitorships_path, class: "btn btn-secondary btn-sm" %>
+          <%= link_to "Voltar", monitorships_path, class: "btn btn-secondary btn-sm" %>
         </div>
       </div>
       <div class="card-body">
         <div class="row mb-3">
-          <div class="col-sm-3"><strong>Subject:</strong></div>
+          <div class="col-sm-3"><strong>Disciplina:</strong></div>
           <div class="col-sm-9">
             <%= link_to @monitorship.subject.name, subject_path(@monitorship.subject), class: "text-decoration-none" %>
             <small class="text-muted d-block"><%= @monitorship.subject.code %></small>
@@ -28,12 +28,12 @@
         </div>
         <hr>
         <div class="row mb-3">
-          <div class="col-sm-3"><strong>Assigned Date:</strong></div>
-          <div class="col-sm-9"><%= @monitorship.created_at.strftime("%B %d, %Y at %I:%M %p") %></div>
+          <div class="col-sm-3"><strong>Data de Atribuição:</strong></div>
+          <div class="col-sm-9"><%= @monitorship.created_at.strftime("%d de %B de %Y às %H:%M") %></div>
         </div>
         <hr>
         <div class="row mb-3">
-          <div class="col-sm-3"><strong>Subject Description:</strong></div>
+          <div class="col-sm-3"><strong>Descrição da Disciplina:</strong></div>
           <div class="col-sm-9"><%= @monitorship.subject.description %></div>
         </div>
       </div>
